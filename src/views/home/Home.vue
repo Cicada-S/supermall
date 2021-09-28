@@ -42,7 +42,7 @@ export default {
       recommends: [],
       goods: {
         'pop': {page: 0, list: []},
-        'new': {page: 0, list: []},
+        'new': {page: 0, list: []}, 
         'sell': {page: 0, list: []}
       },
       currentType: 'pop'
