@@ -62,6 +62,7 @@
 		      this.scrollContent(-this.currentIndex * this.totalWidth);
         }, this.interval)
       },
+      
       stopTimer: function () {
         window.clearInterval(this.playTimer);
       },
