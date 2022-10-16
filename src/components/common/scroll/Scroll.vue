@@ -61,7 +61,7 @@
           this.scroll.finishPullUp()
         }, 2000)
       }
-    },
+    }
   }
 </script>
 

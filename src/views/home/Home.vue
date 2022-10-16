@@ -9,7 +9,8 @@
       <Tab-Control
         class="tab-control"
         :titles="['流行', '新款', '精选']"
-        @tabClick="tabClick" />
+        @tabClick="tabClick"
+        ref="tabControl" />
       <Goods-List :goods="showGoods"><slot></slot></Goods-List>
     </Scroll>
 
@@ -55,8 +56,15 @@ export default {
         sell: { page: 0, list: [] },
       },
       currentType: "pop",
-      isShowBackTop: false
+      isShowBackTop: false,
+      tabOffsetTop: 0
     };
+  },
+  computed: {
+    // 1. 图片加载完成的事件监听
+    showGoods() {
+      return this.goods[this.currentType].list;
+    },
   },
   created() {
     // 1. 请求多个数据
@@ -67,10 +75,13 @@ export default {
     this.getHomeGoods("new");
     this.getHomeGoods("sell");
   },
-  computed: {
-    showGoods() {
-      return this.goods[this.currentType].list;
-    },
+  mounted() {
+    // 1. 图片加载完成的事件监听
+
+    // 2. 获取tabControl的offsetTop
+    // 所有的组件都有一个属性$el: 用于获取组件中的元素
+    this.tabControl = this.$refs.tabControl
+    console.log(this.$refs.tabControl.$el.offsetTop)
   },
   methods: {
     /**
@@ -97,7 +108,7 @@ export default {
 
     // 显示隐藏backTop
     contentScroll(position) {
-        this.isShowBackTop = (-position.y) > 650 ? true : false 
+      this.isShowBackTop = (-position.y) > 650 ? true : false 
     },
 
     // 上拉加载更多
